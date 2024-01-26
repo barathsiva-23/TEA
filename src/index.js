@@ -1,6 +1,7 @@
 const express=require("express");
 const pasth=require("path");
 const crypt=require("bcrypt");
+const collection=require('./config');
 
 const app=express();
 
