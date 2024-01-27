@@ -50,6 +50,28 @@ console.log(userdata);
 
 //REGISTERING COMPLETED;
 
+
+//login code //
+app.post("/login",async(req,res)=>{
+    try{
+        const check=await collection.findOne({name:req.body.username});
+        if(!check){
+            res.send("APPADI ORU USER YAE ILLADA...POI SIGN UP PANNU POO");
+        }
+
+        const ispasswordmatch=await bcrypt.compare(req.body.password,check.password);
+        if(ispasswordmatch){
+            res.render("home");
+        }
+        else{
+            res.send("PASSWORD THAPPU DA....POI OULUNGA PODU");
+        }
+    }
+    catch{
+        res.send("THANGALODA DETAILS THAVARANATHU");
+    }
+})
+
 const port=3000;
 app.listen(port,()=>{
     console.log(`server is running on port :${port}`);
