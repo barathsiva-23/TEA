@@ -29,4 +29,3 @@ const collection = new mongoose.model("REPUBLIC", Loginschema);
 console.log("smdn");
 module.exports = collection;
 
-
