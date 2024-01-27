@@ -44,6 +44,7 @@ if(existinguser){
 }
 else{
 const userdata=await collection.insertMany(data);
+res.render("back");
 console.log(userdata);
 }
 });
