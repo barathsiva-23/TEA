@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
 })  
 
 app.get('/signup',(req,res)=>{
-    res.render("signup");
+    res.render("signup",{vari:""});
 })
 ///REGISTER THE USER
 app.post("/signup",async(req,res)=>{
@@ -40,7 +40,7 @@ const hashpassword= await bcrypt.hash(data.password,saltrounds);
 data.password=hashpassword;
 
 if(existinguser){
-    res.send("USER ALREADY ORUTHAN IRRUKANDA....NEE VERA PODU");
+    res.render("signup",{vari:"Appadi oruthan already irukan da en mairu"});
 }
 else{
 const userdata=await collection.insertMany(data);
