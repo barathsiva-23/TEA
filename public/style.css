@@ -11,6 +11,10 @@ body {
     justify-content: center;
 }
 
+.red{
+  color: red;
+}
+
 
 h2 {
     text-align: center;
