@@ -18,6 +18,10 @@ app.set('view engine','ejs');
 app.use(express.static("public"));
 
 app.get('/',(req,res)=>{
+    res.render("home");
+})
+
+app.get('/login',(req,res)=>{
     res.render("login");
 })  
 
@@ -93,6 +97,9 @@ app.post("/login",async(req,res)=>{
 
         const ispasswordmatch=await bcrypt.compare(req.body.password,check.password);
         if(ispasswordmatch){
+            const token = creatToken(check._id);
+            res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
+            res.status(200);
             res.render("home");
         }
         else{
