@@ -4,6 +4,7 @@ const bcrypt=require("bcrypt");
 const collection=require('./config');
 const cookieParser = require("cookie-parser");
 const jwt = require('jsonwebtoken');
+const { requireAuth } = require("../middlewares/authmiddleware");
 
 const app=express();
 
@@ -27,6 +28,10 @@ app.get('/login',(req,res)=>{
 
 app.get('/signup',(req,res)=>{
     res.render("signup",{vari:""});
+})
+
+app.get('/secret', requireAuth, (req,res)=>{
+    res.render("secret");
 })
 
 const creatToken = (id) =>{
