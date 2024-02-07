@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
+
 app.set('view engine','ejs');
 
 //adding css file here
@@ -72,6 +73,8 @@ app.post("/login",async(req,res)=>{
         res.send("THANGALODA DETAILS THAVARANATHU");
     }
 })
+
+
 
 const port=3000;
 app.listen(port,()=>{
