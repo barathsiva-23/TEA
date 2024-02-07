@@ -4,7 +4,7 @@ const bcrypt=require("bcrypt");
 const collection=require('./config');
 const cookieParser = require("cookie-parser");
 const jwt = require('jsonwebtoken');
-const { requireAuth } = require("../middlewares/authmiddleware");
+const { requireAuth, checkuser } = require("../middlewares/authmiddleware");
 
 const app=express();
 
@@ -33,6 +33,13 @@ app.get('/signup',(req,res)=>{
 app.get('/secret', requireAuth, (req,res)=>{
     res.render("secret");
 })
+
+app.get('/logout',(req,res)=>{
+    res.cookie('jwt','',{maxAge:1});
+    res.redirect('/');
+})
+
+app.get('*',checkuser);
 
 const creatToken = (id) =>{
     return jwt.sign({id},'Tea venum mamey',{
@@ -98,6 +105,7 @@ app.post("/login",async(req,res)=>{
         const check=await collection.findOne({name:req.body.username});
         if(!check){
             res.send("APPADI ORU USER YAE ILLADA...POI SIGN UP PANNU POO");
+            
         }
 
         const ispasswordmatch=await bcrypt.compare(req.body.password,check.password);
