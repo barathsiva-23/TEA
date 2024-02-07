@@ -1,14 +1,16 @@
 const express=require("express");
-const pasth=require("path");
+const path=require("path");
 const bcrypt=require("bcrypt");
 const collection=require('./config');
+const cookieParser = require("cookie-parser");
+const jwt = require('jsonwebtoken');
 
 const app=express();
 
 //CONVERTING DATA INTO JSON FORMat
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
+app.use(cookieParser());
 
 app.set('view engine','ejs');
 
@@ -22,6 +24,32 @@ app.get('/',(req,res)=>{
 app.get('/signup',(req,res)=>{
     res.render("signup",{vari:""});
 })
+
+const creatToken = (id) =>{
+    return jwt.sign({id},'Tea venum mamey',{
+        expiresIn: 1000*60*60*24
+    });
+}
+
+//setting and getting cookies example 
+
+
+// app.get('/set-cookies',(req,res)=>{
+//     // res.setHeader("Set-Cookie","newUser=true");
+//     res.cookie('newUser',false);
+//     res.cookie('isemployee',true,{maxAge: 60 * 60 * 24,httpOnly:true});
+
+
+//     res.send("you got the cookies");
+// })
+
+// app.get('/read-cookies',(req,res)=>{
+//     const cookies = req.cookies;
+//     console.log(cookies);
+//     res.json(cookies);
+// })
+
+
 ///REGISTER THE USER
 app.post("/signup",async(req,res)=>{
          const data={
@@ -44,6 +72,9 @@ if(existinguser){
 }
 else{
 const userdata=await collection.insertMany(data);
+const token = creatToken(userdata._id);
+res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
+res.status(201);
 res.render("back");
 console.log(userdata);
 }
