@@ -18,7 +18,6 @@ app.set('view engine','ejs');
 
 //adding css file here
 app.use(express.static("public"));
-
 app.get('/',(req,res)=>{
     res.render("home");
 })
@@ -35,11 +34,16 @@ app.get('/secret', requireAuth, (req,res)=>{
     res.render("secret");
 })
 
+app.get('/order',requireAuth,(req,res)=>{
+    res.render("order");
+})
+
+
 const creatToken = (id) =>{
     return jwt.sign({id},'Tea venum mamey',{
         expiresIn: 1000*60*60*24
     });
-}
+} 
 
 //setting and getting cookies example 
 
