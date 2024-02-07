@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const jwt = require('jsonwebtoken');
 const { requireAuth, checkuser } = require("../middlewares/authmiddleware");
 
+
 const app=express();
 
 //CONVERTING DATA INTO JSON FORMat
@@ -27,22 +28,11 @@ app.get('/login',(req,res)=>{
 })  
 
 app.get('/signup',(req,res)=>{
-    res.render("signup",{vari:""});
+    res.render("signup");
 })
 
 app.get('/secret', requireAuth, (req,res)=>{
     res.render("secret");
-})
-
-app.get('/logout',(req,res)=>{
-    res.cookie('jwt','',{maxAge:1});
-    res.redirect('/');
-})
-
-app.get('*',checkuser);
-
-app.get('/order',requireAuth,(req,res)=>{
-    res.render("order");
 })
 
 
@@ -82,35 +72,46 @@ const creatToken = (id) =>{
 //     res.json(cookies);
 // })
 
+const handleErrors = (err) =>{
+    console.log(err.message,err.code);
+    let errors = {
+        name : '',
+        password : ''
+    }
+
+    //duplicate error code
+    if(err.code === 11000){
+        errors.name = "User already exist";
+        return errors;
+    }
+
+    //validation errors
+    if(err.message.includes('REPUBLIC validation failed')){
+        Object.values(err.errors).forEach(({properties}) =>{
+            errors[properties.path] = properties.message;
+        });
+    }
+
+    return errors;
+}
 
 ///REGISTER THE USER
 app.post("/signup",async(req,res)=>{
-         const data={
-            name:req.body.username,
-            password:req.body.password
-         }
+        const {name,password} = req.body;
+
+        try{
+            const user = await collection.create({name,password});
+            const token = creatToken(user._id);
+            res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
+            res.status(201).json({user : user._id});
+        }
+        catch(err){
+            const errors = handleErrors(err);
+            res.status(400).json({errors});
+        }
 
 
-//CHECKING IF ALREADY EXISTS
-const existinguser=await collection.findOne({name:data.name})
 
-
-//hashing the password
-const saltrounds=10;
-const hashpassword= await bcrypt.hash(data.password,saltrounds);
-data.password=hashpassword;
-
-if(existinguser){
-    res.render("signup",{vari:"Appadi oruthan already irukan da en mairu"});
-}
-else{
-const userdata=await collection.insertMany(data);
-const token = creatToken(userdata._id);
-res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
-res.status(201);
-res.render("back");
-console.log(userdata);
-}
 });
 
 //REGISTERING COMPLETED;
@@ -122,7 +123,6 @@ app.post("/login",async(req,res)=>{
         const check=await collection.findOne({name:req.body.username});
         if(!check){
             res.send("APPADI ORU USER YAE ILLADA...POI SIGN UP PANNU POO");
-            
         }
 
         const ispasswordmatch=await bcrypt.compare(req.body.password,check.password);
