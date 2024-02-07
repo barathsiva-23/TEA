@@ -13,11 +13,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
+
 app.set('view engine','ejs');
 
 //adding css file here
 app.use(express.static("public"));
-
 app.get('/',(req,res)=>{
     res.render("home");
 })
@@ -41,11 +41,28 @@ app.get('/logout',(req,res)=>{
 
 app.get('*',checkuser);
 
+app.get('/order',requireAuth,(req,res)=>{
+    res.render("order");
+})
+
+
+app.get('/logout',(req,res)=>{
+    res.cookie('jwt','',{maxAge:1});
+    res.redirect('/');
+})
+
+app.get('*',checkuser);
+
+app.get('/order',requireAuth,(req,res)=>{
+    res.render("order");
+})
+ 
+
 const creatToken = (id) =>{
     return jwt.sign({id},'Tea venum mamey',{
         expiresIn: 1000*60*60*24
     });
-}
+} 
 
 //setting and getting cookies example 
 
@@ -123,6 +140,8 @@ app.post("/login",async(req,res)=>{
         res.send("THANGALODA DETAILS THAVARANATHU");
     }
 })
+
+
 
 const port=3000;
 app.listen(port,()=>{
