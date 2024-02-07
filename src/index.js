@@ -18,9 +18,14 @@ app.set('view engine','ejs');
 
 //adding css file here
 app.use(express.static("public"));
+
+app.get('*',checkuser);
+
+
 app.get('/',(req,res)=>{
     res.render("home");
 })
+
 
 app.get('/login',(req,res)=>{
     res.render("login");
@@ -39,7 +44,7 @@ app.get('/logout',(req,res)=>{
     res.redirect('/');
 })
 
-app.get('*',checkuser);
+
 
 app.get('/order',requireAuth,(req,res)=>{
     res.render("order");
@@ -51,7 +56,7 @@ app.get('/logout',(req,res)=>{
     res.redirect('/');
 })
 
-app.get('*',checkuser);
+
 
 app.get('/order',requireAuth,(req,res)=>{
     res.render("order");
@@ -121,7 +126,7 @@ app.post("/login",async(req,res)=>{
     try{
         const check=await collection.findOne({name:req.body.username});
         if(!check){
-            res.send("APPADI ORU USER YAE ILLADA...POI SIGN UP PANNU POO");
+            res.render("signup",{vari:"credentials  thappu da"});
             
         }
 
