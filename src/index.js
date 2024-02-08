@@ -29,7 +29,7 @@ app.get('/',(req,res)=>{
 
 app.get('/login',(req,res)=>{
     res.render("login");
-})  
+});
 
 app.get('/signup',(req,res)=>{
     res.render("signup",{vari:""});
@@ -104,6 +104,7 @@ const existinguser=await collection.findOne({name:data.name})
 const saltrounds=10;
 const hashpassword= await bcrypt.hash(data.password,saltrounds);
 data.password=hashpassword;
+
 
 if(existinguser){
     res.render("signup",{vari:"Appadi oruthan already irukan da en mairu"});
