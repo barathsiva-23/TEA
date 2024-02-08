@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { requireAuth, checkuser } = require("../middlewares/authmiddleware");
 
 
+
 const app=express();
 
 //CONVERTING DATA INTO JSON FORMat
@@ -66,7 +67,7 @@ app.get('/order',requireAuth,(req,res)=>{
 
 const creatToken = (id) =>{
     return jwt.sign({id},'Tea venum mamey',{
-        expiresIn: 1000*60*60*24
+        expiresIn: 60*60*24
     });
 } 
 
@@ -93,6 +94,16 @@ const handleErrors = (err) =>{
     let errors = {
         name : '',
         password : ''
+    }
+
+    //incorrect name
+    if(err.message === 'incorrect name'){
+        errors.name = 'that user is not registered';
+    }
+    
+    //incorrect password
+    if(err.message === 'incorrect password'){
+        errors.password = 'password is incorrect';
     }
 
     //duplicate error code
@@ -135,27 +146,21 @@ app.post("/signup",async(req,res)=>{
 
 //login code //
 app.post("/login",async(req,res)=>{
-    try{
-        const check=await collection.findOne({name:req.body.username});
-        if(!check){
-            res.send("APPADI ORU USER YAE ILLADA...POI SIGN UP PANNU POO");
-            
-        }
+    const {name, password} = req.body;
 
-        const ispasswordmatch=await bcrypt.compare(req.body.password,check.password);
-        if(ispasswordmatch){
-            const token = creatToken(check._id);
-            res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
-            res.status(200);
-            res.render("home");
-        }
-        else{
-            res.send("PASSWORD THAPPU DA....POI OULUNGA PODU");
-        }
+    try {
+        const user = await collection.login(name,password);
+        const token = creatToken(user._id);
+        res.cookie('jwt',token,{maxAge:1000*60*60*24,httpOnly:true});
+        res.status(200).json({user:user._id});
+
+    } catch (err) {
+        const errors = handleErrors(err);
+        res.status(400).json({errors});
     }
-    catch{
-        res.send("THANGALODA DETAILS THAVARANATHU");
-    }
+
+
+    
 })
 
 

@@ -39,12 +39,25 @@ Loginschema.post('save',function(doc,next){
 //firing a function before the data is saved
 Loginschema.pre('save', async function(next){
     //hashing the password
-    const saltrounds=10;
-    this.password= await bcrypt.hash(this.password,saltrounds);
+    const salt =await  bcrypt.genSalt();
+    this.password= await bcrypt.hash(this.password,salt);
     
     console.log('user is going to be save',this);
     next();
 })
+
+//static method to login user
+Loginschema.statics.login = async function(name,password){
+    const user = await this.findOne({name});
+    if(user){
+        const auth = await bcrypt.compare(password,user.password);
+        if(auth){
+            return user;
+        }
+        throw Error('incorrect password');
+    }
+    throw Error('incorrect name');
+}
 
 // collection part
 const collection = new mongoose.model("REPUBLIC", Loginschema);
