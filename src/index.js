@@ -25,7 +25,7 @@ app.get('*',checkuser);
 
 
 app.get('/',(req,res)=>{
-    res.render("home");
+    res.render("home_n");
 })
 
 
