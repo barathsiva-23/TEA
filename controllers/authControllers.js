@@ -27,6 +27,18 @@ module.exports.logout = (req,res) =>{
     res.redirect('/');
 }
 
+module.exports.breakfast=(req,res)=>{
+    res.render("breakfast")
+}
+
+module.exports.lunch=(req,res)=>{
+    res.render("lunch")
+}
+
+module.exports.dinner=(req,res)=>{
+    res.render("dinner")
+}
+
 const creatToken = (id) =>{
     return jwt.sign({id},'Tea venum mamey',{
         expiresIn: 60*60*24

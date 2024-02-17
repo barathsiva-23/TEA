@@ -23,4 +23,13 @@ router.post('/signup',authController.signup_post);
 
 router.post('/login',authController.login_post);
 
+
+///menu orders
+router.get('/breakfast',authController.breakfast);
+
+router.get('/lunch',authController.lunch);
+
+router.get('/dinner',authController.dinner);
+
+
 module.exports = router;
