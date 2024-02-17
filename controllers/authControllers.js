@@ -15,7 +15,7 @@ module.exports.signup_get = (req,res) =>{
 }
 
 module.exports.order = (req,res) =>{
-    res.render("order");
+    res.render("mainpage");
 }
 
 module.exports.secret = (req,res) =>{

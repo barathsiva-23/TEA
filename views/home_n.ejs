@@ -1,205 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tea</title>
-    <link rel="stylesheet" href="/home_n.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOOD WASTAGE CONTROL</title>
+  <link rel="stylesheet" href="/home_n.css">
 </head>
 <body>
-    <!-- header -->
-<header class="header">
-    <!--   logo -->
-      <a href="#" class="logo">
-        <i class="fas fa-coffee"></i>coffee shop
-      </a>
-      
-    <!--   linked list -->
-      <nav class="navbar">
-        <div id="close-navbar" class="fas fa-times"></div>
-        <a href="#">home</a>
-        <a href="#about">about</a>
-        <a href="#menu">menu</a>
-        <a href="#contact">contact</a>
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
-      </nav>
-      
-    <!--   humburger menu  -->
-      <div class="icons">
-    <!--     put dark mode here later -->
-        <div id="menu-btn" class="fas fa-bars"></div>
+  <nav id="navbar">
+    <div id="logo">
+      <img src="https://i.ibb.co/NVG8fn6/logo.jpg" alt="SarfarazMeals.com">
+    </div>
+    <ul>
+      <li class="item"><a href="#home">Home</a></li>
+      <li class="item"><a href="#services-container">Services</a></li>
+      <li class="item"><a href="#contact">Contact Us</a></li>
+      <li class="item"><a href="/signup">Signup</a></li>
+      <li class="item"><a href="/login">Login</a></li>
+    </ul>
+  </nav>
+  
+  <section id="home">
+    <h1 class="h-primary">Welcome to SarfarazMeals</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis dolorum numquam minus. </p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+    <a href="/order" class="btn">Order Now</a>
+  </section>
+  
+  <section id="services-container">
+    <h1 class="h-primary center">Our Services</h1>
+    <div id="services">
+      <div class="box">
+        <img src="https://i.ibb.co/0sNY1WY/Service1.png" alt="">
+        <h2 class="h-secondary center">Food Catering</h2>
+        <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, culpa suscipit error
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et qui, repudiandae similique nam,
+          recusandae quidem ab asperiores ex, aut fugit labore veritatis facere?
+          sint delectus ab dolorum nam. Debitis facere, incidunt voluptates eos, mollitia voluptatem iste sunt
+          voluptas beatae facilis labore, omnis sint quae eum.</p>
       </div>
-    </header>
-    <!-- end header -->
-    <!-- Home -->
-    <section id="home" class="home">
-      <div class="content">
-        <h3>
-          Discover the <br>
-          taste of real <br>
-          coffee
-        </h3>
-        <a href="/order" class="btn">order now</a>
+      <div class="box">
+        <img src="https://i.ibb.co/RGK3df8/Service2.png" alt="">
+        <h2 class="h-secondary center">Bulk Ordering</h2>
+        <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, culpa suscipit error
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde laudantium a incidunt animi ad, ab
+          dignissimos vero? Unde numquam odit repudiandae perferendis nisi.
+  
+          sint delectus ab dolorum nam. Debitis facere, incidunt voluptates eos, mollitia voluptatem iste sunt
+          voluptas beatae facilis labore, omnis sint quae eum.</p>
       </div>
-    </section>
-    <!-- home -->
-    
-    <!-- About us -->
-    <h1 class="heading">about us</h1>
-    <section id="about" class="about">
-      <div class="row">
-        
-    <!--     image -->
-        <div class="image">
-          <img src="https://images.pexels.com/photos/373639/pexels-photo-373639.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="person represent coffee cup">
-        </div>
-        
-        <div class="content">
-          <h3>what makes our coffee special?</h3>
-          <div class="line"></div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ut nam et libero harum illo, inventore voluptatem eligendi fugit tempore, fugiat reiciendis, non culpa vel est possimus! Deserunt, omnis inventore?</p>
-        </div>
-        
+      <div class="box">
+        <img src="https://i.ibb.co/7zPVKSb/Service3.png" alt="">
+        <h2 class="h-secondary center">Food Ordering</h2>
+        <p class="center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, culpa suscipit error
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus provident fugiat aliquam
+          minima at explicabo. Earum eveniet quaerat, sunt molestias nesciunt quas! Quis.
+          sint delectus ab dolorum nam. Debitis facere, incidunt voluptates eos, mollitia voluptatem iste sunt
+          voluptas beatae facilis labore, omnis sint quae eum.</p>
       </div>
-    </section>
-    <!-- end -->
-    
-    <!-- Menu -->
-    <section id="menu" class="menu">
-      
-      <h1 class="heading">Menu</h1>
-      
-      <div class="box-container">
-        
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://th.bing.com/th/id/R.bb11359a9631303f2ab00306b841fe38?rik=1FdYHD2ZJb8n8w&pid=ImgRaw&r=0" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
+    </div>
+  </section>
+ 
+  <section id="contact">
+    <h1 class="h-primary center">Contact Us</h1>
+    <div id="contact-box">
+      <form action="">
+        <div class="form-group">
+          <label for="name">Name: </label>
+          <input type="text" name="name" id="name" placeholder="Enter your name">
         </div>
-    <!--     end item -->
-        
-            
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://grhaciumbuleuitgh.com/wp-content/uploads/2019/03/cup-300x216.jpg" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="email" name="name" id="email" placeholder="Enter your email">
         </div>
-    <!--     end item -->
-        
-            
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://th.bing.com/th/id/R.bf72f8daaf68995eda4aa22e58c7d687?rik=3ZmRisqxGjNtdg&riu=http%3a%2f%2fi.dailymail.co.uk%2fi%2fpix%2f2016%2f10%2f07%2f15%2f2F24CB2600000578-0-Another_often_abused_word_is_the_strong_Italian_coffee_you_might-m-134_1475849625933.jpg&ehk=VPkATqC%2f7afBgAIT6AmYlukMLE9V%2brznGMuf1BpBbRs%3d&risl=&pid=ImgRaw&r=0" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
+        <div class="form-group">
+          <label for="phone">Phone Number: </label>
+          <input type="phone" name="name" id="phone" placeholder="Enter your phone">
         </div>
-    <!--     end item -->
-        
-            
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://th.bing.com/th/id/OIP.NUOXG6pzphuDJ4DCDo18qQHaHJ?pid=ImgDet&w=518&h=500&rs=1" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
+        <div class="form-group">
+          <label for="message">Message: </label>
+          <textarea name="message" id="message" cols="30" rows="10"></textarea>
         </div>
-    <!--     end item -->
-        
-            
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://th.bing.com/th/id/OIP.rAab2CCtoE2DjHi1a74nnwAAAA?pid=ImgDet&w=220&h=176&rs=1" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
-        </div>
-    <!--     end item -->
-                
-    <!--     start item -->
-        <div class="box">
-          
-          <img src="https://th.bing.com/th/id/OIP.ogi_P-79GcljsS9Z1iUaAAHaHa?pid=ImgDet&w=180&h=180&rs=1" alt="coffee">
-          <h3>Classic coffee espresso</h3>
-          <div class="price">$10</div>
-          
-        </div>
-    <!--     end item -->
-        
-      </div>
-    </section>
-    
-    <!-- end -->
-    <!-- contact us -->
-    <section id="contact" class="contact">
-      
-      <h1 class="heading">contact us</h1>
-      
-      <div class="row">
-        
-        <div class="image">
-          
-          <img src="https://images.pexels.com/photos/2074130/pexels-photo-2074130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="contact us">
-          
-        </div>
-        
-        <form action="">
-          
-          <h3>get in touch</h3>
-          
-    <!--       start input field -->
-          <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" name="" id="" placeholder="name" >
-          </div>
-    <!--       end input field -->
-               
-    <!--       start input field -->
-          <div class="input-box">
-            <i class="fas fa-envelope"></i>
-            <input type="email" name="" id="" placeholder="email" >
-          </div>
-    <!--       end input field -->
-               
-    <!--       start input field -->
-          <div class="input-box">
-            <i class="fas fa-phone"></i>
-            <input type="phone" name="" id="" placeholder="phone" >
-          </div>
-    <!--       end input field -->
-          
-          <input type="submit" value="send message" class="btn" >
-          
-        </form>
-        
-      </div>
-      
-    </section>
-    <!-- end -->
-    
-    <!-- Footer -->
-
-    <!-- end -->
+      </form>
+    </div>
+  </section>
+  
+  
 </body>
-<script>
-    let navbar = document.querySelector('.header .navbar');
-
-document.querySelector('#menu-btn').onclick = () =>{
-  navbar.classList.add('active');
-}
-
-document.querySelector('#close-navbar').onclick = () =>{
-  navbar.classList.remove('active');
-}
-</script>
 </html>
